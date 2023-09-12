@@ -40,13 +40,22 @@ public class StopWords {
     public boolean isStopword(String word) {
         return stopwords.contains(word.toLowerCase()); 
     }
+    
+    public boolean Numero(String word) {
+        return word.matches("\\d+");
+    }
+    
+    public boolean containsSpecialCharacters(String word) {
+        return !word.matches("^[a-zA-Z]*$");
+    }
 
+    
     public List<String> findStopwordsInText(String text) {
         List<String> stopwordsFound = new ArrayList<>();
         String[] words = text.split("\\s+"); 
 
         for (String word : words) {
-            if (isStopword(word)) {
+            if (!containsSpecialCharacters(word) && !isStopword(word) && !Numero(word)) {
                 stopwordsFound.add(word);
             }
         }
