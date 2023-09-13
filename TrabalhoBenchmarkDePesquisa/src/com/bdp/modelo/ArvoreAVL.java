@@ -9,7 +9,7 @@ package com.bdp.modelo;
  * @author aluno
  */
 public class ArvoreAVL {
-    	
+    	private int numeroDeComparacaoAVL = 0;
 	public class Node {
 	    String key;
 	    int height;
@@ -36,6 +36,7 @@ public class ArvoreAVL {
     }
 
     public void insert(String key) {
+        //colocar contador de tempo
         root = insert(root, key);
     }
 
@@ -52,40 +53,52 @@ public class ArvoreAVL {
     }
 
     private Node insert(Node node, String key) {
-       
+       //colocar contador de tempo
         if (node == null) {
+            numeroDeComparacaoAVL++;
             return new Node(key);
         } 
          int compare = node.key.compareTo(key);
         if (compare > 0) {
             node.left = insert(node.left, key);
+            numeroDeComparacaoAVL++;
         } else if (compare < 0) {
             node.right = insert(node.right, key);
+            numeroDeComparacaoAVL++;
         } else {
+            numeroDeComparacaoAVL++;
             throw new RuntimeException("duplicate Key!");
         }
         return rebalance(node);
     }
 
     private Node delete(Node node, String key) {
-        int compare = node.key.compareTo(key);
+        //colocar contador de tempo
         if (node == null) {
+            numeroDeComparacaoAVL++;
             return node;
-        } else if (compare > 0) {
+        } 
+        int compare = node.key.compareTo(key);
+        if (compare > 0) {
             node.left = delete(node.left, key);
+            numeroDeComparacaoAVL++;
         } else if (compare < 0) {
             node.right = delete(node.right, key);
+            numeroDeComparacaoAVL++;
         } else {
             if (node.left == null || node.right == null) {
                 node = (node.left == null) ? node.right : node.left;
+                numeroDeComparacaoAVL++;
             } else {
                 Node mostLeftChild = mostLeftChild(node.right);
                 node.key = mostLeftChild.key;
                 node.right = delete(node.right, node.key);
+                numeroDeComparacaoAVL++;
             }
         }
         if (node != null) {
             node = rebalance(node);
+            numeroDeComparacaoAVL++;
         }
         return node;
     }
@@ -156,11 +169,11 @@ public class ArvoreAVL {
         if (node != null) {
             System.out.print(indent);
             if (last) {
-                System.out.print("??");
+                System.out.print("└─");
                 indent += "  ";
             } else {
-                System.out.print("??");
-                indent += "? ";
+                System.out.print("├─");
+                indent += "│ ";
             }
             System.out.println(node.key);
 
@@ -174,4 +187,11 @@ public class ArvoreAVL {
     	printAVLTree(root, "", true);
     }
 
+    public int getNumeroDeComparacaoAVL() {
+        return numeroDeComparacaoAVL;
+    }
+
+    
+    
+    
 }
