@@ -4,6 +4,9 @@
  */
 package com.bdp.visao;
 
+import com.bdp.ferramentas.StopWords;
+import com.bdp.modelo.ArvoreBinariaSem;
+
 /**
  *
  * @author pedrohjs.senai
@@ -119,6 +122,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 new TelaPrincipal().setVisible(true);
             }
         });
+        
+        StopWords stopWords = new StopWords();
+     String[]lista =  stopWords.processFile("C:\\Users\\viniciusfs.senai\\Downloads\\arquivo.txt");
+        
+        
+        
+          for (String valor : lista) {
+            System.out.println(valor);
+        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
