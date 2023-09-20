@@ -48,35 +48,35 @@ public class StopWords {
    public String[] processFile(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line; // linha por linha
-            String texto_bruto = ""; //declarando o texto total
+            String textoBruto = ".\\src\\com\\bdp\\dados\\textoTeste.txt"; //declarando o texto total
             
             while ((line = br.readLine()) != null) { 
-                texto_bruto += line + " "; //serve pra dar espaço entre as linhas
+                textoBruto += line + " "; //serve pra dar espaço entre as linhas
             }
             
-            char letras[] = texto_bruto.toCharArray(); //todo o texto bruto vai virar um vetor de caracter
+            char letras[] = textoBruto.toCharArray(); //todo o texto bruto vai virar um vetor de caracter
             
-            texto_bruto = ""; //esvazia a variavel texto_bruto
+            textoBruto = ""; //esvazia a variavel texto_bruto
             
             for(int i = 0; i < letras.length; i++){ //analisa o vetor de letras até o fim
-                if(Character.isLetter(letras[i]) || letras[i] == ' ') texto_bruto += letras[i]; //isLetter deixa apenas letras - letras[i] == ' ' deixa espaços
+                if(Character.isLetter(letras[i]) || letras[i] == ' ') textoBruto += letras[i]; //isLetter deixa apenas letras - letras[i] == ' ' deixa espaços
             }
             
-            texto_bruto = " " + texto_bruto + " "; //Coloca um espaço antes e depois do texto bruto
+            textoBruto = " " + textoBruto + " "; //Coloca um espaço antes e depois do texto bruto
             for (String stopword : stopwords) { //analisa todas as stopwords e substitui por nada/tirar
-                texto_bruto = texto_bruto.replaceAll(" " + stopword + " ", " "); //replaceALL troca todas as ocorrencias do primeiro parametro pro segundo
+                textoBruto = textoBruto.replaceAll(" " + stopword + " ", " "); //replaceALL troca todas as ocorrencias do primeiro parametro pro segundo
             }
             
             
-            texto_bruto = texto_bruto.replaceAll("  ", " "); //replaceALL troca todas as ocorrencias do primeiro parametro pro segundo
+            textoBruto = textoBruto.replaceAll("  ", " "); //replaceALL troca todas as ocorrencias do primeiro parametro pro segundo
             
-            texto_bruto = texto_bruto.trim(); //tira espaço do inicio e do fim
+            textoBruto = textoBruto.trim(); //tira espaço do inicio e do fim
             
              //retorna um vetor de palavras
             
-            String texto[] = texto_bruto.split(" ");
+            String texto[] = textoBruto.split(" ");
          
-            System.out.println(texto_bruto);
+            System.out.println(textoBruto);
             
             
             
