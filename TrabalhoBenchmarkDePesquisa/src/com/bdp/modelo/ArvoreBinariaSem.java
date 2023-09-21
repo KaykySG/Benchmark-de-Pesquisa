@@ -12,7 +12,7 @@ import java.io.IOException;
  * @author aluno
  */
 public class ArvoreBinariaSem {
-    	
+    	int contComparacao = 0;
 	public class Node {
 	    String key;
 	    int height;
@@ -61,8 +61,10 @@ public class ArvoreBinariaSem {
         } 
          int compare = node.key.compareTo(key);
         if (compare > 0) {
-            node.left = insert(node.left, key);
+            contComparacao += 1;
+            node.left = insert(node.left, key);          
         } else if (compare < 0) {
+            contComparacao += 1;
             node.right = insert(node.right, key);
         } else {
             throw new RuntimeException("duplicate Key!");

@@ -48,7 +48,7 @@ public class StopWords {
    public String[] processFile(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line; // linha por linha
-            String textoBruto = ".\\src\\com\\bdp\\dados\\textoTeste.txt"; //declarando o texto total
+            String textoBruto = ""; //declarando o texto total
             
             while ((line = br.readLine()) != null) { 
                 textoBruto += line + " "; //serve pra dar espaço entre as linhas
@@ -73,6 +73,7 @@ public class StopWords {
             textoBruto = textoBruto.trim(); //tira espaço do inicio e do fim
             
              //retorna um vetor de palavras
+             textoBruto = textoBruto.toLowerCase();
             
             String texto[] = textoBruto.split(" ");
          
