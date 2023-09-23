@@ -17,22 +17,22 @@ public class TelaArvoreTeste extends javax.swing.JFrame {
     /**
      * Creates new form TelaArvoreTeste
      */
-    public TelaArvoreTeste() {
-        initComponents();
-        Graph graph = new SingleGraph("Meu Grafo");
-        
-        Node node1 = graph.addNode("A");
-        Node node2 = graph.addNode("B");
-        Node node3 = graph.addNode("C");
-        
-        graph.addEdge("AB", "A", "B");
-        graph.addEdge("BC", "B", "C");
-        graph.addEdge("CA", "C", "A");
-        
-        graph.display();
-        setVisible(true);
-    }
-    
+//    public TelaArvoreTeste() {
+//        initComponents();
+//        Graph graph = new SingleGraph("Meu Grafo");
+//        
+//        Node node1 = graph.addNode("A");
+//        Node node2 = graph.addNode("B");
+//        Node node3 = graph.addNode("C");
+//        
+//        graph.addEdge("AB", "A", "B");
+//        graph.addEdge("BC", "B", "C");
+//        graph.addEdge("CA", "C", "A");
+//        
+//        graph.display();
+//        setVisible(true);
+//    }
+//    
         
     
 
