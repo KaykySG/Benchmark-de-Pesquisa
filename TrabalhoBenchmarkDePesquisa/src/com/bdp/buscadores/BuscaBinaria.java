@@ -24,6 +24,7 @@ public class BuscaBinaria {
             
             int meio = (inicio + fim) / 2;
             int comparacao = vetor[meio].compareTo(palavra);
+            System.out.println(vetor[meio]);
             System.out.println(vetor[meio].compareTo(palavra));
             if (comparacao == 0) {
                 contComparacao += 1;
