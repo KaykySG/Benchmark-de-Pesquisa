@@ -18,8 +18,8 @@ public class StopWords {
     private List<String> stopwords;
 
     public StopWords() {
-        String[] stopwordsArray = {"de",  "a",  "o",  "que",  "e",  "do",  "da", "em",  "um",  "para",  "é",  "com",  "não",
-    "uma",  "os",  "no",  "se",  "na",  "por",  "mais",  "as",  "dos",  "como",  "mas",  "foi",  "ao",  "ele",  "das",
+        String[] stopwordsArray = {"de",  "a", "A",  "o",  "que",  "e",  "do",  "da", "em",  "um",  "para",  "é",  "com",  "não",
+    "uma",  "os",  "no",  "se",  "na", "Na",  "por",  "mais",  "as",  "dos",  "como",  "mas",  "foi",  "ao",  "ele",  "das",
     "tem",  "à",  "seu",  "sua",  "ou",  "ser",  "quando",  "muito",  "há",  "nos",  "já",  "está",  "eu",  "também",
     "só",  "pelo",  "pela",  "até",  "isso",  "ela",  "entre",  "era",  "depois",  "sem",  "mesmo",  "aos",  "ter",
     "seus",  "quem",  "nas",  "me",  "esse",  "eles",  "estão",  "você",  "tinha",  "foram",  "essa",  "num",  "nem",
@@ -53,7 +53,7 @@ public class StopWords {
             while ((line = br.readLine()) != null) { 
                 textoBruto += line + " "; //serve pra dar espaço entre as linhas
             }
-            
+            textoBruto = textoBruto.toLowerCase();
             char letras[] = textoBruto.toCharArray(); //todo o texto bruto vai virar um vetor de caracter
             
             textoBruto = ""; //esvazia a variavel texto_bruto
@@ -73,7 +73,7 @@ public class StopWords {
             textoBruto = textoBruto.trim(); //tira espaço do inicio e do fim
             
              //retorna um vetor de palavras
-             textoBruto = textoBruto.toLowerCase();
+             
             
             String texto[] = textoBruto.split(" ");
          
