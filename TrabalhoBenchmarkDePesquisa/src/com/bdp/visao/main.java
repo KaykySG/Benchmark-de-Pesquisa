@@ -31,17 +31,19 @@ import java.util.Scanner;
                     
                     if (opc == 1) {
                         System.out.println("Digite a palavra que deseja procurar:");
-                        String palavra = sc.nextLine();
                         sc.nextLine();
-                        long inicio = System.currentTimeMillis();
-                        boolean resultado = buscaBinaria(vetor, palavra);
-                                       
-                       if (resultado){
-                            System.out.println("Encontrado!");
-                        }else{
-                            System.out.println("Não encontrado!");
-                            }
-                        long fim = System.currentTimeMillis();
+                        String palavra = sc.nextLine();
+                        
+                        palavra = palavra.toLowerCase();
+                        
+                        long inicioTemp = System.currentTimeMillis();
+                        boolean encontrou = buscaBinaria(vetor, palavra);
+                        if (encontrou) {
+                        System.out.println("A palavra foi encontrada no vetor.");
+                        } else {
+                        System.out.println("A palavra não foi encontrada no vetor.");
+                        }
+                        long fimTemp = System.currentTimeMillis();
                 }
                     if (opc == 2) {
                 //long inicio = System.currentTimeMillis();    //codigo de medir o tempo
