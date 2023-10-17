@@ -66,7 +66,7 @@ public class ArvoreAVL {
             node.right = insert(node.right, key);
             numeroDeComparacaoAVL++;
         } else {
-            System.out.println("Duplicado!");
+            //System.out.println("Duplicado!");
             
         }
         return rebalance(node);

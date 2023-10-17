@@ -5,6 +5,7 @@
 package com.bdp.visao;
 import com.bdp.buscadores.BuscaBinaria;
 import static com.bdp.buscadores.BuscaBinaria.buscaBinaria;
+import com.bdp.ferramentas.ContadorDePalavras;
 import com.bdp.ferramentas.StopWords;
 import com.bdp.modelo.ArvoreAVL;
 import com.bdp.modelo.ArvoreBinariaSem;
@@ -14,8 +15,10 @@ import java.util.Scanner;
  * @author ageuv
  */
     public class main { public static void main(String[] args) throws Exception {
+                    
                     StopWords spw = new StopWords();
                     String vetor[] = spw.processFile(".\\src\\com\\bdp\\dados\\textoTeste.txt");
+                    ContadorDePalavras contadorRepetidas = new ContadorDePalavras(vetor);
                     ArvoreAVL arvAVL = new ArvoreAVL();
                     ArvoreBinariaSem arvB = new ArvoreBinariaSem();
                     
@@ -46,13 +49,14 @@ import java.util.Scanner;
                         long fimTemp = System.currentTimeMillis();
                 }
                     if (opc == 2) {
-                //long inicio = System.currentTimeMillis();    //codigo de medir o tempo
+                        long inicio = System.currentTimeMillis(); //codigo de medir o tempo
                         for (int i = 0; i < vetor.length; i++) {
                             arvAVL.insert(vetor[i]);
                         }
                         arvAVL.printAVLTree();
-                //long fim = System.currentTimeMillis();
-                    
+                long fim = System.currentTimeMillis();
+                    long tempoFinal = fim-inicio;
+                        System.out.println("\n"+arvAVL.getNumeroDeComparacaoAVL()+" comparações\n"+tempoFinal+" segundos");
                 }
                     if (opc == 3) {
                         for (int i = 0; i < vetor.length; i++) {
@@ -60,5 +64,9 @@ import java.util.Scanner;
                         }
                         arvB.printAVLTree();
                 }
+                    
+                System.out.println("\nfrequencia das palavras");   
+                contadorRepetidas.contarPalavras();
+                    
     }
     }
