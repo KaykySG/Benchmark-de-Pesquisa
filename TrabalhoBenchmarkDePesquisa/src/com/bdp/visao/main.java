@@ -10,17 +10,25 @@ import com.bdp.ferramentas.StopWords;
 import com.bdp.modelo.ArvoreAVL;
 import com.bdp.modelo.ArvoreBinariaSem;
 import java.util.Scanner;
+import com.bdp.modelo.*;
+
 /**
  *
  * @author ageuv
  */
     public class main { public static void main(String[] args) throws Exception {
                     
+                    
+        
+        
                     StopWords spw = new StopWords();
                     String vetor[] = spw.processFile(".\\src\\com\\bdp\\dados\\textoTeste.txt");
                     ContadorDePalavras contadorRepetidas = new ContadorDePalavras(vetor);
                     ArvoreAVL arvAVL = new ArvoreAVL();
                     ArvoreBinariaSem arvB = new ArvoreBinariaSem();
+                    
+
+                    RedBlackTree tree = new RedBlackTree();
                     
                     Scanner sc = new Scanner(System.in);
                     
@@ -28,7 +36,9 @@ import java.util.Scanner;
                     System.out.println("Escolha o tipo de busca:\n"
                                      + "(1)Busca Binária\n"
                                      + "(2)Árvore AVL\n"
-                                     + "(3)Árvore Binária sem balanceamento");
+                                     + "(3)Árvore Binária sem balanceamento\n"
+                                     + "(4)Árvore B\n"
+                                     + "(5) Árvore Rubro-negra");
                     
                     int opc = sc.nextInt();
                     
@@ -63,6 +73,40 @@ import java.util.Scanner;
                             arvB.insert(vetor[i]);
                         }
                         arvB.printAVLTree();
+                }
+                    
+                    if (opc == 4) {
+                    
+                    int ordem = 0;
+                    
+                   Scanner scanner = new Scanner(System.in);
+                   System.out.println("Qual a ordem que você deseja?");
+                   ordem = scanner.nextInt();
+   
+                    BTree bTree = new BTree(ordem);
+                    
+                    for (String word : vetor) {
+                    bTree.insert(word);
+                }
+
+                    System.out.println("Árvore B:");
+                    bTree.printBTree();
+                }
+                    
+                    if (opc ==5){
+                long inicio = System.currentTimeMillis();
+
+                    for (String word : vetor) {
+                tree.insertNode(word);
+        }
+                System.out.println("Árvore RB:");
+                tree.printTree();
+                long fim = System.currentTimeMillis();
+                long tempoFinal = fim-inicio;
+                
+                System.out.println("\n"+tree.getContador()+" comparações\n"+tempoFinal+" segundos");
+
+                
                 }
                     
                 System.out.println("\nfrequencia das palavras");   
