@@ -7,6 +7,7 @@ import com.bdp.buscadores.BuscaBinaria;
 import static com.bdp.buscadores.BuscaBinaria.buscaBinaria;
 import com.bdp.ferramentas.ContadorDePalavras;
 import com.bdp.ferramentas.StopWords;
+import com.bdp.ferramentas.tiraRepetidor;
 import com.bdp.modelo.ArvoreAVL;
 import com.bdp.modelo.ArvoreBinariaSem;
 import java.util.Scanner;
@@ -78,7 +79,7 @@ import com.bdp.modelo.*;
                     if (opc == 4) {
                     
                     int ordem = 0;
-                    
+                   long inicioTemp = System.currentTimeMillis();
                    Scanner scanner = new Scanner(System.in);
                    System.out.println("Qual a ordem que você deseja?");
                    ordem = scanner.nextInt();
@@ -88,15 +89,25 @@ import com.bdp.modelo.*;
                     for (String word : vetor) {
                     bTree.insert(word);
                 }
-
+                     
                     System.out.println("Árvore B:");
                     bTree.printBTree();
+                    long fim = System.currentTimeMillis();
+                    long tempoFinal = fim-inicioTemp;
+                    System.out.println("Tempo:"+tempoFinal);
+
                 }
                     
                     if (opc ==5){
                 long inicio = System.currentTimeMillis();
-
-                    for (String word : vetor) {
+              
+                
+         
+            String[] removePalavrasRepetidas = tiraRepetidor.removePalavrasRepetidas(vetor);
+            
+            
+            
+                for (String word : removePalavrasRepetidas) {
                 tree.insertNode(word);
         }
                 System.out.println("Árvore RB:");
