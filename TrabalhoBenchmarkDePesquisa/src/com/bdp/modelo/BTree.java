@@ -27,7 +27,7 @@ class BTreeNode {
 public class BTree {
     private BTreeNode root;  // Raiz da árvore B
     private int t;           // Grau mínimo da árvore
-
+    private int contConparador;
     // Construtor para criar uma nova árvore B
     public BTree(int t) {
         this.t = t;
@@ -52,14 +52,16 @@ public class BTree {
     // Método auxiliar para inserção em um nó não cheio
     private void insertNonFull(BTreeNode x, String word) {
         int i = x.keys.size() - 1;
-
+        
         if (x.leaf) {  // Se x é uma folha
             // Encontre a posição correta para a palavra e insira-a
+            contConparador++;
             while (i >= 0 && word.compareTo(x.keys.get(i)) < 0) {
                 i--;
             }
             x.keys.add(i + 1, word);
         } else {  // Se x é um nó interno
+            contConparador++;
             // Encontre o filho apropriado para a palavra e insira-a recursivamente
             while (i >= 0 && word.compareTo(x.keys.get(i)) < 0) {
                 i--;
@@ -68,6 +70,7 @@ public class BTree {
 
             // Se o filho está cheio, divida-o antes de continuar a inserção
             if (x.children.get(i).keys.size() == 2 * t - 1) {
+                contConparador++;
                 splitChild(x, i);
                 if (word.compareTo(x.keys.get(i)) > 0) {
                     i++;
@@ -166,7 +169,8 @@ public class BTree {
             }
         }
     }
-    
-      
-    
+
+    public int getContConparador() {
+        return contConparador;
+    } 
 }

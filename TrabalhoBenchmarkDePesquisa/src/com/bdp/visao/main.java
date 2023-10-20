@@ -4,7 +4,6 @@
  */
 package com.bdp.visao;
 import com.bdp.buscadores.BuscaBinaria;
-import static com.bdp.buscadores.BuscaBinaria.buscaBinaria;
 import com.bdp.ferramentas.ContadorDePalavras;
 import com.bdp.ferramentas.StopWords;
 import com.bdp.ferramentas.tiraRepetidor;
@@ -27,6 +26,7 @@ import com.bdp.modelo.*;
                     ContadorDePalavras contadorRepetidas = new ContadorDePalavras(vetor);
                     ArvoreAVL arvAVL = new ArvoreAVL();
                     ArvoreBinariaSem arvB = new ArvoreBinariaSem();
+                    BuscaBinaria buscaBi = new BuscaBinaria();
                     
 
                     RedBlackTree tree = new RedBlackTree();
@@ -50,36 +50,43 @@ import com.bdp.modelo.*;
                         
                         palavra = palavra.toLowerCase();
                         
-                        long inicioTemp = System.currentTimeMillis();
-                        boolean encontrou = buscaBinaria(vetor, palavra);
+                        double inicioTemp = System.currentTimeMillis();
+                        boolean encontrou = buscaBi.buscaBinaria(vetor, palavra);
                         if (encontrou) {
                         System.out.println("A palavra foi encontrada no vetor.");
                         } else {
                         System.out.println("A palavra não foi encontrada no vetor.");
                         }
-                        long fimTemp = System.currentTimeMillis();
+                        double fimTemp = System.currentTimeMillis();
+                        System.out.println("\n"+buscaBi.getContComparacao()+" comparações\n"+ (fimTemp - inicioTemp)/1000+" segundos");
                 }
                     if (opc == 2) {
-                        long inicio = System.currentTimeMillis(); //codigo de medir o tempo
+                        double inicio = System.currentTimeMillis(); //codigo de medir o tempo
                         for (int i = 0; i < vetor.length; i++) {
                             arvAVL.insert(vetor[i]);
                         }
                         arvAVL.printAVLTree();
-                long fim = System.currentTimeMillis();
-                    long tempoFinal = fim-inicio;
+                        double fim = System.currentTimeMillis();
+                        double tempoFinal = (fim-inicio)/1000;
                         System.out.println("\n"+arvAVL.getNumeroDeComparacaoAVL()+" comparações\n"+tempoFinal+" segundos");
                 }
                     if (opc == 3) {
+                        double inicio = System.currentTimeMillis();
                         for (int i = 0; i < vetor.length; i++) {
                             arvB.insert(vetor[i]);
                         }
+                        double fim = System.currentTimeMillis();
+                        double tempoFinal = (fim-inicio)/1000;
+                        
                         arvB.printAVLTree();
+                        
+                        System.out.println("\n"+arvB.getContComparacao()+" comparações\n"+tempoFinal+" segundos");
                 }
                     
                     if (opc == 4) {
                     
                     int ordem = 0;
-                   long inicioTemp = System.currentTimeMillis();
+                   double inicioTemp = System.currentTimeMillis();
                    Scanner scanner = new Scanner(System.in);
                    System.out.println("Qual a ordem que você deseja?");
                    ordem = scanner.nextInt();
@@ -92,14 +99,15 @@ import com.bdp.modelo.*;
                      
                     System.out.println("Árvore B:");
                     bTree.printBTree();
-                    long fim = System.currentTimeMillis();
-                    long tempoFinal = fim-inicioTemp;
-                    System.out.println("Tempo:"+tempoFinal);
+                    double fim = System.currentTimeMillis();
+                    double tempoFinal = (fim-inicioTemp)/1000.0;
+                    
+                    System.out.println("\n"+bTree.getContConparador()+" comparações\n"+tempoFinal+" segundos");
 
                 }
                     
                     if (opc ==5){
-                long inicio = System.currentTimeMillis();
+                double inicio = System.currentTimeMillis();
               
                 
          
@@ -112,8 +120,8 @@ import com.bdp.modelo.*;
         }
                 System.out.println("Árvore RB:");
                 tree.printTree();
-                long fim = System.currentTimeMillis();
-                long tempoFinal = fim-inicio;
+                double fim = System.currentTimeMillis();
+                double tempoFinal = (fim-inicio)/1000;
                 
                 System.out.println("\n"+tree.getContador()+" comparações\n"+tempoFinal+" segundos");
 

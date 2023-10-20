@@ -77,7 +77,7 @@ public class StopWords {
             
             String texto[] = textoBruto.split(" ");
          
-            System.out.println(textoBruto);
+//            System.out.println(textoBruto);
             
             
             

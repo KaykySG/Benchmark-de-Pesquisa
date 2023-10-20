@@ -67,7 +67,7 @@ public class ArvoreBinariaSem {
             contComparacao += 1;
             node.right = insert(node.right, key);
         } else {
-            System.out.println("duplicate Key!");
+//            System.out.println("duplicate Key!");
         }
         return node;
     }
@@ -134,6 +134,12 @@ public class ArvoreBinariaSem {
             e.printStackTrace();
         }
     }
+
+    public int getContComparacao() {
+        return contComparacao;
+    }
+  
+  
     }
 
 

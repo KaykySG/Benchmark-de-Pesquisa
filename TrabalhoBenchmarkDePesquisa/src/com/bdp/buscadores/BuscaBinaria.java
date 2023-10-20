@@ -14,25 +14,29 @@ import java.util.Arrays;
 
     
 public class BuscaBinaria {
- 
-    public static boolean buscaBinaria(String[] vetor, String palavra) {
+    private int contComparacao = 0;
+
+    public BuscaBinaria() {
+    }
+    
+    
+    public boolean buscaBinaria(String[] vetor, String palavra) {
         
         Arrays.sort(vetor);
         
         
-        System.out.println(Arrays.toString(vetor));
+//        System.out.println(Arrays.toString(vetor));
         
         System.out.println("a palavra que está sendo procurada é " + palavra);
         int inicio = 0;
         int meio = 0;
         int fim = vetor.length - 1;
-        int contComparacao = 0;
+        
         while (inicio <= fim) {
             
             meio = (fim + inicio) / 2;
             int comparacao = vetor[meio].compareTo(palavra);
-            System.out.println(vetor[meio]);
-            System.out.println(vetor[meio].compareTo(palavra));
+
             if (comparacao == 0) {
                 contComparacao += 1;
                 return true;               
@@ -46,4 +50,10 @@ public class BuscaBinaria {
 
         return false;
     }
+
+    public int getContComparacao() {
+        return contComparacao;
+    }
+    
+    
 }

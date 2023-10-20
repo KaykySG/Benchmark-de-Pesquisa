@@ -52,12 +52,16 @@ public class RedBlackTree {
 
         // Traverse the tree to the left or right depending on the key
         while (node != null) {
+            
           parent = node;
           if (key.compareTo(node.data)<0) {
+              contador++;
             node = node.left;
           } else if (key.compareTo(node.data)>0) {
+              contador++;
             node = node.right;
           } else {
+              contador++;
             throw new IllegalArgumentException("BST already contains a node with key " + key);
           } 
         }
