@@ -5,16 +5,21 @@
 package com.bdp.ferramentas;
 
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.security.auth.callback.TextOutputCallback;
 
 public class StopWords {
+
     private List<String> stopwords;
 
     public StopWords() {
-       String[] stopwordsArray = {"de",  "a",  "o",  "que",  "e",  "do",  "da", "em",  "um",  "para",  "é",  "com",  "não",
-    "uma",  "os",  "no",  "se",  "na",  "por",  "mais",  "as",  "dos",  "como",  "mas",  "foi",  "ao",  "ele",  "das",
+        String[] stopwordsArray = {"de",  "a", "A",  "o",  "que",  "e",  "do",  "da", "em",  "um",  "para",  "é",  "com",  "não",
+    "uma",  "os",  "no",  "se",  "na", "Na",  "por",  "mais",  "as",  "dos",  "como",  "mas",  "foi",  "ao",  "ele",  "das",
     "tem",  "à",  "seu",  "sua",  "ou",  "ser",  "quando",  "muito",  "há",  "nos",  "já",  "está",  "eu",  "também",
     "só",  "pelo",  "pela",  "até",  "isso",  "ela",  "entre",  "era",  "depois",  "sem",  "mesmo",  "aos",  "ter",
     "seus",  "quem",  "nas",  "me",  "esse",  "eles",  "estão",  "você",  "tinha",  "foram",  "essa",  "num",  "nem",
@@ -33,34 +38,56 @@ public class StopWords {
     "tínhamos",  "tinham",  "tive",  "teve",  "tivemos",  "tiveram",  "tivera",  "tivéramos",  "tenha",  "tenhamos",
     "tenham",  "tivesse",  "tivéssemos",  "tivessem",  "tiver",  "tivermos",  "tiverem",  "terei",  "terá",  "teremos",
     "terão",  "teria",  "teríamos",  "teriam"};
-
+        
         stopwords = Arrays.asList(stopwordsArray);
     }
 
-    public boolean isStopword(String word) {
-        return stopwords.contains(word.toLowerCase()); 
-    }
     
-    public boolean Numero(String word) {
-        return word.matches("\\d+");
-    }
-    
-    public boolean containsSpecialCharacters(String word) {
-        return !word.matches("^[a-zA-Z]*$");
-    }
-
-    
-    public List<String> findStopwordsInText(String text) {
-        List<String> stopwordsFound = new ArrayList<>();
-        String[] words = text.split("\\s+"); 
-
-        for (String word : words) {
-            if (!containsSpecialCharacters(word) && !isStopword(word) && !Numero(word)) {
-                stopwordsFound.add(word);
+   
+        
+   public String[] processFile(String filePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line; // linha por linha
+            String textoBruto = ""; //declarando o texto total
+            
+            while ((line = br.readLine()) != null) { 
+                textoBruto += line + " "; //serve pra dar espaço entre as linhas
             }
+            textoBruto = textoBruto.toLowerCase();
+            char letras[] = textoBruto.toCharArray(); //todo o texto bruto vai virar um vetor de caracter
+            
+            textoBruto = ""; //esvazia a variavel texto_bruto
+            
+            for(int i = 0; i < letras.length; i++){ //analisa o vetor de letras até o fim
+                if(Character.isLetter(letras[i]) || letras[i] == ' ') textoBruto += letras[i]; //isLetter deixa apenas letras - letras[i] == ' ' deixa espaços
+            }
+            
+            textoBruto = " " + textoBruto + " "; //Coloca um espaço antes e depois do texto bruto
+            for (String stopword : stopwords) { //analisa todas as stopwords e substitui por nada/tirar
+                textoBruto = textoBruto.replaceAll(" " + stopword + " ", " "); //replaceALL troca todas as ocorrencias do primeiro parametro pro segundo
+            }
+            
+            
+            textoBruto = textoBruto.replaceAll("  ", " "); //replaceALL troca todas as ocorrencias do primeiro parametro pro segundo
+            
+            textoBruto = textoBruto.trim(); //tira espaço do inicio e do fim
+            
+             //retorna um vetor de palavras
+             
+            
+            String texto[] = textoBruto.split(" ");
+         
+//            System.out.println(textoBruto);
+            
+            
+            
+            
+            return texto;
+            
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        return stopwordsFound;
-    }
+        
+        return null;
+   }
 }
-
